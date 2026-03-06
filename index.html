@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Text to Speech</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 100px auto;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: vertical;
+    }
+
+    .buttons {
+      margin-top: 15px;
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      flex: 1;
+      padding: 12px;
+      font-size: 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+    }
+
+    #speakBtn { background: #4CAF50; }
+    #stopBtn  { background: #f44336; }
+
+    #status {
+      margin-top: 15px;
+      text-align: center;
+      color: #777;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔊 Text to Speech</h1>
+
+  <textarea id="text" placeholder="Type your text here..."></textarea>
+
+  <div class="buttons">
+    <button id="speakBtn" onclick="speak()">▶ Speak</button>
+    <button id="stopBtn"  onclick="stopSpeech()">■ Stop</button>
+  </div>
+
+  <p id="status"></p>
+
+  <script>
+    function speak() {
+      const text = document.getElementById('text').value.trim();
+      if (!text) { alert('Please enter some text!'); return; }
+
+      speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(text);
+
+      utterance.onstart = () => document.getElementById('status').textContent = 'Speaking...';
+      utterance.onend   = () => document.getElementById('status').textContent = 'Done!';
+
+      speechSynthesis.speak(utterance);
+    }
+
+    function stopSpeech() {
+      speechSynthesis.cancel();
+      document.getElementById('status').textContent = 'Stopped.';
+    }
+  </script>
+
+</body>
+</html>
