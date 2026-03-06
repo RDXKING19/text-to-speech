@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gadesh Molguru | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue:   #1d4ed8;
+      --cyan:   #06b6d4;
+      --dark:   #0f172a;
+      --body:   #334155;
+      --muted:  #64748b;
+      --bg:     #f8fafc;
+      --white:  #ffffff;
+      --border: #e2e8f0;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--body); line-height: 1.7; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+      background: rgba(248,250,252,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 8%; height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { font-weight: 800; color: var(--blue); font-size: 1.1rem; }
+    .nav-links { list-style: none; display: flex; gap: 1.8rem; }
+    .nav-links a { font-size: 0.86rem; font-weight: 600; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--blue); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 22px; height: 2px; background: var(--dark); border-radius: 2px; }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      padding: 120px 8% 80px;
+      display: flex; align-items: center;
+      background: linear-gradient(135deg, #f0f4ff 0%, #e0f2fe 100%);
+    }
+    .hero-wrap { max-width: 680px; }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: #dbeafe; color: var(--blue);
+      font-size: 0.76rem; font-weight: 700;
+      padding: 5px 13px; border-radius: 100px;
+      margin-bottom: 1.4rem;
+    }
+    .badge span { width: 7px; height: 7px; background: var(--blue); border-radius: 50%; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    #hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+      font-weight: 800; color: var(--dark);
+      line-height: 1.1; letter-spacing: -1.5px;
+      margin-bottom: 0.8rem;
+    }
+    #hero h1 span { color: var(--blue); }
+
+    .tagline { font-size: 0.88rem; font-weight: 600; color: var(--blue); margin-bottom: 1.1rem; }
+
+    .intro { font-size: 0.97rem; color: var(--muted); max-width: 500px; margin-bottom: 2rem; }
+
+    .btns { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .btn-blue {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--blue); color: #fff;
+      font-size: 0.87rem; font-weight: 700;
+      padding: 10px 20px; border-radius: 9px;
+      text-decoration: none; transition: .2s;
+    }
+    .btn-blue:hover { background: #1e40af; transform: translateY(-1px); }
+    .btn-white {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--white); color: var(--dark);
+      font-size: 0.87rem; font-weight: 700;
+      padding: 10px 20px; border-radius: 9px;
+      border: 1.5px solid var(--border);
+      text-decoration: none; transition: .2s;
+    }
+    .btn-white:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-1px); }
+
+    .socials { display: flex; gap: 10px; }
+    .socials a {
+      width: 38px; height: 38px; border-radius: 9px;
+      border: 1.5px solid var(--border); background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); text-decoration: none; transition: .2s;
+    }
+    .socials a:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+
+    /* SECTIONS */
+    section { padding: 80px 8%; }
+    .label {
+      display: inline-block;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--blue); background: #dbeafe;
+      padding: 4px 11px; border-radius: 100px; margin-bottom: 0.7rem;
+    }
+    h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: var(--dark); letter-spacing: -0.6px; margin-bottom: 0.5rem; }
+    .sub { font-size: 0.92rem; color: var(--muted); max-width: 480px; margin-bottom: 2.8rem; }
+
+    /* ABOUT */
+    #about { background: var(--white); }
+    .about-box {
+      max-width: 680px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem 2.2rem;
+    }
+    .about-box p { font-size: 0.95rem; color: var(--body); margin-bottom: 0.9rem; }
+    .about-box p:last-child { margin-bottom: 0; }
+    .about-box strong { color: var(--dark); }
+
+    /* SKILLS */
+    #skills { background: var(--bg); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .skill-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 13px; padding: 1.4rem;
+      transition: .2s;
+    }
+    .skill-card:hover { border-color: var(--blue); box-shadow: 0 4px 20px rgba(29,78,216,0.1); transform: translateY(-3px); }
+    .sk-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: #dbeafe; color: var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; margin-bottom: 0.9rem;
+    }
+    .skill-card h3 { font-size: 0.88rem; font-weight: 700; color: var(--dark); margin-bottom: 0.7rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .tag {
+      font-size: 0.72rem; font-weight: 600;
+      padding: 3px 9px; border-radius: 6px;
+      background: var(--bg); color: var(--body);
+      border: 1px solid var(--border);
+    }
+    .tag.l { background: #fefce8; color: #b45309; border-color: #fde68a; }
+
+    /* PROJECTS */
+    #projects { background: var(--white); }
+    .project-card {
+      max-width: 500px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 14px; padding: 1.8rem;
+      transition: .2s;
+    }
+    .project-card:hover { border-color: var(--blue); box-shadow: 0 6px 24px rgba(29,78,216,0.1); transform: translateY(-3px); }
+    .proj-num { font-size: 0.68rem; font-weight: 800; color: var(--cyan); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 0.6rem; }
+    .project-card h3 { font-size: 1rem; font-weight: 800; color: var(--dark); margin-bottom: 0.5rem; }
+    .project-card p { font-size: 0.88rem; color: var(--muted); margin-bottom: 1rem; }
+    .tech-row { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 1.2rem; }
+    .tbadge { font-size: 0.7rem; font-weight: 700; background: #dbeafe; color: var(--blue); padding: 3px 9px; border-radius: 6px; }
+    .p-links { display: flex; gap: 8px; }
+    .p-links a {
+      flex: 1; text-align: center;
+      font-size: 0.78rem; font-weight: 700;
+      padding: 8px; border-radius: 8px; text-decoration: none; transition: .2s;
+    }
+    .gh { border: 1.5px solid var(--border); color: var(--muted); }
+    .gh:hover { border-color: var(--dark); color: var(--dark); }
+    .demo { background: var(--blue); color: #fff; }
+    .demo:hover { background: #1e40af; }
+
+    /* SERVICES */
+    #services { background: var(--bg); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .s-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 13px; padding: 1.6rem;
+      transition: .2s;
+    }
+    .s-card:hover { border-color: var(--blue); box-shadow: 0 4px 20px rgba(29,78,216,0.1); transform: translateY(-3px); }
+    .s-icon {
+      width: 44px; height: 44px; border-radius: 11px;
+      background: #dbeafe; color: var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; margin-bottom: 1rem;
+    }
+    .s-card h3 { font-size: 0.9rem; font-weight: 700; color: var(--dark); margin-bottom: 0.4rem; }
+    .s-card p { font-size: 0.84rem; color: var(--muted); }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark); color: #475569;
+      text-align: center; padding: 1.6rem 8%;
+      font-size: 0.82rem;
+    }
+    footer strong { color: #fff; }
+    footer .c { color: var(--cyan); }
+
+    /* FADE */
+    .fi { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
+    .fi.show { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      nav { padding: 0 5%; }
+      .nav-links { display: none; position: fixed; top: 60px; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--border); flex-direction: column; padding: 1rem 5%; gap: 0.8rem; }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      section { padding: 60px 5%; }
+      #hero { padding: 100px 5% 60px; }
+      .btns { flex-direction: column; }
+      .btn-blue, .btn-white { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">GM.</div>
+  <ul class="nav-links" id="nav">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#services">Services</a></li>
+  </ul>
+  <div class="hamburger" id="burger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-wrap fi">
+    <div class="badge"><span></span> CS Student & Developer</div>
+    <h1>Gadesh<br/><span>Molguru</span></h1>
+    <p class="tagline">Frontend Developer &nbsp;|&nbsp; AI Explorer &nbsp;|&nbsp; Data Analytics</p>
+    <p class="intro">Passionate about building modern web applications and exploring AI technologies. I enjoy solving real-world problems through code.</p>
+    <div class="btns">
+      <a href="#projects" class="btn-blue"><i class="fa-solid fa-rocket"></i> View Projects</a>
+      <a href="#" class="btn-white"><i class="fa-solid fa-download"></i> Download Resume</a>
+    </div>
+    <div class="socials">
+      <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+      <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="fi">
+    <span class="label">About Me</span>
+    <h2>Who I Am</h2>
+    <p class="sub">A little about my background and what drives me.</p>
+  </div>
+  <div class="about-box fi">
+    <p>I'm a passionate <strong>web developer and AI enthusiast</strong> who loves building clean and creative digital solutions. I have experience in front-end development and basic data analytics, and I enjoy solving real-world problems through technology.</p>
+    <p>I'm constantly learning, improving my skills, and exploring modern tools in <strong>AI and web development</strong> to grow as a developer.</p>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="fi">
+    <span class="label">Skills</span>
+    <h2>What I Work With</h2>
+    <p class="sub">Technologies and tools I use and am learning.</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card fi">
+      <div class="sk-icon"><i class="fa-solid fa-code"></i></div>
+      <h3>Frontend Development</h3>
+      <div class="tags">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag l">React — Learning</span>
+      </div>
+    </div>
+    <div class="skill-card fi">
+      <div class="sk-icon"><i class="fa-solid fa-terminal"></i></div>
+      <h3>Programming</h3>
+      <div class="tags">
+        <span class="tag l">Python — Learning</span>
+      </div>
+    </div>
+    <div class="skill-card fi">
+      <div class="sk-icon"><i class="fa-solid fa-brain"></i></div>
+      <h3>AI & Data</h3>
+      <div class="tags">
+        <span class="tag">ML Basics</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">Data Visualization</span>
+      </div>
+    </div>
+    <div class="skill-card fi">
+      <div class="sk-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+      <h3>Tools</h3>
+      <div class="tags">
+        <span class="tag">Git & GitHub</span>
+        <span class="tag">VS Code</span>
+        <span class="tag">Canva</span>
+        <span class="tag">MS Office</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="fi">
+    <span class="label">My Work</span>
+    <h2>Projects</h2>
+    <p class="sub">Things I've built and learned from.</p>
+  </div>
+  <div class="project-card fi">
+    <div class="proj-num">Project 01</div>
+    <h3>Text to Speech Converter</h3>
+    <p>A web app that converts typed text into spoken audio using the Web Speech API. Users can choose voices, adjust speed and pitch, and play back speech — all in the browser.</p>
+    <div class="tech-row">
+      <span class="tbadge">HTML</span>
+      <span class="tbadge">CSS</span>
+      <span class="tbadge">JavaScript</span>
+      <span class="tbadge">Web Speech API</span>
+    </div>
+    <div class="p-links">
+      <a href="https://github.com/RDXKING19/text-to-speech" class="gh"><i class="fa-brands fa-github"></i> GitHub</a>
+      <a href="https://rdxking19.github.io/text-to-speech/" class="demo"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="fi">
+    <span class="label">What I Offer</span>
+    <h2>Services</h2>
+    <p class="sub">Ways I can help and contribute.</p>
+  </div>
+  <div class="services-grid">
+    <div class="s-card fi">
+      <div class="s-icon"><i class="fa-solid fa-laptop-code"></i></div>
+      <h3>Frontend Development</h3>
+      <p>Building clean, responsive websites using HTML, CSS, and JavaScript.</p>
+    </div>
+    <div class="s-card fi">
+      <div class="s-icon"><i class="fa-solid fa-chart-bar"></i></div>
+      <h3>Basic Data Analysis</h3>
+      <p>Analyzing data and creating simple visualizations using Python and Pandas.</p>
+    </div>
+    <div class="s-card fi">
+      <div class="s-icon"><i class="fa-solid fa-robot"></i></div>
+      <h3>Beginner AI Projects</h3>
+      <p>Building basic AI/ML projects like face recognition and classification models.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Made with <span class="c">♥</span> by <strong>Gadesh Molguru</strong> &nbsp;·&nbsp; &copy; 2025</p>
+</footer>
+
+<script>
+  document.getElementById('burger').addEventListener('click', () => {
+    document.getElementById('nav').classList.toggle('open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a =>
+    a.addEventListener('click', () => document.getElementById('nav').classList.remove('open'))
+  );
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+  document.querySelector('#hero .fi').classList.add('show');
+</script>
+</body>
+</html>
